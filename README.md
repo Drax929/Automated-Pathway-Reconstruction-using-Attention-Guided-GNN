@@ -70,6 +70,6 @@ Develop an interactive visualization dashboard for pathway analysis.
 
 Pratyush Lenka 23BAI1470
 
-Aayush P Menon 23BAI1470
+Aayush P Menon 23BAI1467
 
 Research on Graph Neural Networks & Bioinformatics
