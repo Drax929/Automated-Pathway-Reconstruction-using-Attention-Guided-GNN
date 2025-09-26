@@ -1,75 +1,140 @@
-# Automated-Pathway-Reconstruction-using-Attention-Guided-GNN
-# Overview
+# Automated Pathway Reconstruction using Attention Guided Graph Neural Network (AG-GNN)
 
-This project focuses on reconstructing biological pathways from large-scale protein–protein interaction (PPI) datasets using Attention-Guided Graph Neural Networks (GATs).
-The framework enables:
+This repository contains a Graph Neural Network (GNN) pipeline for protein analysis, implemented in PyTorch and PyTorch Geometric. The notebook protein_gnn_final.ipynb provides an end-to-end workflow for protein-graph construction, model training, evaluation, and biological interpretation.
 
-Link prediction: Discovering potential new protein–protein interactions.
+# 📌 Project Overview
 
-Pathway reconstruction: Clustering predicted interactions into functional pathways.
+Proteins can be represented as graphs, where:
 
-External comparison: Matching reconstructed pathways with known biological databases (e.g., KEGG, Reactome).
+Nodes → amino acids or residues
 
-Generalization: Applying a trained GAT model to new datasets and classifying them into known or novel pathways.
+Edges → structural/chemical interactions (e.g., bonds, spatial proximity, PPI edges)
 
-# Features
+This project applies Graph Attention Networks (GATs) to protein-related tasks:
 
-Build PPI networks from raw STRING database inputs.
+Node classification → predict functional properties of amino acids
 
-Train Graph Attention Networks (GATs) to learn protein embeddings.
+Link prediction → infer residue interactions (protein–protein or within a protein)
 
-Perform link prediction to identify missing or novel interactions.
+Graph-level classification → predict overall protein properties
 
-Cluster embeddings into functional biological pathways using unsupervised ML.
+The pipeline also integrates biological pathway enrichment (using KEGG genes) to link predictions back to biological insights.
 
-Compare clusters with external reference pathways using similarity metrics (e.g., Jaccard, Cosine).
+# ⚙️ Dependencies
 
-Support new dataset generalization for pathway classification.
+Install required packages:
 
-# Tech Stack
+pip install torch torchvision torchaudio
+pip install torch-geometric
+pip install scikit-learn pandas numpy matplotlib networkx
 
-Languages: Python
+# 📂 File Structure
 
-Libraries: PyTorch, PyTorch Geometric, scikit-learn, NetworkX, NumPy, pandas, matplotlib
+protein_gnn_final.ipynb → main notebook with full pipeline
 
-Data Sources: STRING protein–protein interaction datasets, KEGG/Reactome pathways
+models/ → trained models saved as .pkl files (after running)
 
-# Workflow
+results/ → evaluation metrics, confusion matrices, plots
 
-Preprocessing: Load and clean STRING protein–protein interaction data.
+# 🚀 Usage
 
-Graph Construction: Build a PyTorch Geometric graph from proteins and interactions.
+Open and run the notebook:
 
-GAT Training: Train a Graph Attention Network to learn node embeddings.
+jupyter notebook protein_gnn_final.ipynb
 
-Link Prediction: Predict new protein–protein interactions from embeddings.
 
-Pathway Reconstruction: Cluster embeddings into candidate pathways.
+The workflow includes:
 
-External Comparison: Match pathways with KEGG/Reactome via similarity metrics.
+Data preprocessing (convert protein/PPI data → graph format)
 
-New Dataset Generalization: Apply trained GAT to unseen data and classify pathways.
+Model definition (custom GAT encoder, link predictor)
 
-# Evaluation
+Training with PyTorch Geometric
 
-Link Prediction: AUC, F1-score
+Evaluation with scikit-learn metrics
 
-Clustering Quality: Silhouette score, Davies–Bouldin index
+Biological enrichment analysis
 
-Pathway Matching: Jaccard similarity, Cosine similarity heatmaps
+# Outputs generated:
 
-# Future Work
+Accuracy, precision, recall, F1-score → CSV files
 
-Incorporate multi-omics data (gene expression, epigenomics).
+Confusion matrices → images
 
-Extend to cross-species pathway reconstruction.
+Saved models → .pkl
 
-Develop an interactive visualization dashboard for pathway analysis.
+# 🧩 Code Structure
+# 🔹 Classes (3 total)
+
+GATModel → Full Graph Attention Network model
+
+GATEncoder → Encoder module for feature extraction
+
+LinkPredictor → Predicts interactions (edges) between protein nodes
+
+# 🔹 Functions (32 total)
+Data & Graph Preparation
+
+print_structure() → prints dataset structure
+
+visualize_ppi_graph() → plots protein-protein interaction (PPI) network
+
+add_node_embeddings() → assigns embeddings to nodes
+
+convert_to_pyg_data() → converts raw dataset to PyTorch Geometric format
+
+prepare_node_classification() → prepares data for node-level prediction
+
+prepare_link_prediction() → prepares data for link prediction
+
+# Training & Evaluation
+
+train() → training loop
+
+evaluate() → validation loop
+
+evaluate_test() → test set evaluation
+
+get_neg_edges() → negative sampling for link prediction
+
+# Model Internals
+
+__init__(), forward(), decode() → defined within GATModel, GATEncoder, and LinkPredictor
+
+# Biological Analysis
+
+fetch_kegg_pathway_genes() → fetches KEGG pathway gene sets
+
+enrichment_analysis() → performs biological enrichment
+
+jaccard() → computes Jaccard similarity between sets
+
+(Additional utility functions handle preprocessing, evaluation metrics, and saving results.)
+
+# 📊 Outputs
+
+Metrics: Accuracy, precision, recall, F1-score (CSV)
+
+Plots: Training curves, confusion matrices
+
+Models: Trained GNNs saved as .pkl for reuse
+
+Biological insights: Pathway enrichment results
+
+# 🔮 Extensions
+
+Experiment with alternative GNNs: GraphSAGE, GCN, GIN
+
+Hyperparameter tuning (layers, heads, dropout)
+
+Transfer learning across protein datasets
+
+Deploy as a protein function prediction API
 
 # Author
 
 Pratyush Lenka 23BAI1470
 
-Aayush P Menon 23BAI1467
+(CSE-AIML) PRE-FINAL YEAR
 
-Research on Graph Neural Networks & Bioinformatics
+VELLORE INSTITUTE OF TECHNOLOGY, CHENNAI
