@@ -25,7 +25,9 @@ The pipeline also integrates biological pathway enrichment (using KEGG genes) to
 Install required packages:
 
 pip install torch torchvision torchaudio
+
 pip install torch-geometric
+
 pip install scikit-learn pandas numpy matplotlib networkx
 
 # 📂 File Structure
